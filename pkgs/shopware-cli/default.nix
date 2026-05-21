@@ -9,22 +9,22 @@
 let
   inherit (stdenvNoCC.hostPlatform) system;
   shaMap = {
-    x86_64-linux = "1gxc1pl527lj40iaciyqs8dbfx261lf6k0ggpkfgv4zf4baas9pj";
-    aarch64-linux = "021p2frpmc6zv552nwqpiqx0ysqhgxr1ql7vp2vcgvaxrx10gcjh";
-    x86_64-darwin = "1xwf4brss8rq2vgkkgdiff5apz2ibwqqm1c0kl61hwmk8kv931il";
-    aarch64-darwin = "06ny0svf6s7nzki94s01773s1cxm3ampya6mgprawziah61s74c2";
+    x86_64-linux = "16pm05amajs9pxj4xm6cwsim28zq52ghgypd5wvnr61vqvj1j363";
+    aarch64-linux = "1g4gkcp17bhrrk0k124rl7pz5ia36l16c3dqipby70myz7yphffc";
+    x86_64-darwin = "07cnsjdvznjl8vii7dk8nw9pv0css39y7rx968bj3z78airbcp2h";
+    aarch64-darwin = "1h0fana04gifv9hgd8yd57y07cg7mg2d54gckklpbfwya2700i8w";
   };
 
   urlMap = {
-    x86_64-linux = "https://github.com/shopware/shopware-cli/releases/download/0.16.0-alpha-1/shopware-cli_Linux_x86_64.tar.gz";
-    aarch64-linux = "https://github.com/shopware/shopware-cli/releases/download/0.16.0-alpha-1/shopware-cli_Linux_arm64.tar.gz";
-    x86_64-darwin = "https://github.com/shopware/shopware-cli/releases/download/0.16.0-alpha-1/shopware-cli_Darwin_x86_64.tar.gz";
-    aarch64-darwin = "https://github.com/shopware/shopware-cli/releases/download/0.16.0-alpha-1/shopware-cli_Darwin_arm64.tar.gz";
+    x86_64-linux = "https://github.com/shopware/shopware-cli/releases/download/0.15.1/shopware-cli_Linux_x86_64.tar.gz";
+    aarch64-linux = "https://github.com/shopware/shopware-cli/releases/download/0.15.1/shopware-cli_Linux_arm64.tar.gz";
+    x86_64-darwin = "https://github.com/shopware/shopware-cli/releases/download/0.15.1/shopware-cli_Darwin_x86_64.tar.gz";
+    aarch64-darwin = "https://github.com/shopware/shopware-cli/releases/download/0.15.1/shopware-cli_Darwin_arm64.tar.gz";
   };
 in
 stdenvNoCC.mkDerivation {
   pname = "shopware-cli";
-  version = "0.16.0-alpha-1";
+  version = "0.15.1";
   src = fetchurl {
     url = urlMap.${system};
     sha256 = shaMap.${system};
@@ -39,7 +39,6 @@ stdenvNoCC.mkDerivation {
     cp -vr ./shopware-cli $out/bin/shopware-cli
   '';
   postInstall = ''
-    ln -sf "$out/bin/shopware-cli" "$out/bin/swx"
     installShellCompletion --cmd shopware-cli \
     --bash <($out/bin/shopware-cli completion bash) \
     --zsh <($out/bin/shopware-cli completion zsh) \
